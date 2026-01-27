@@ -1,0 +1,342 @@
+<template>
+    <lightning-card title="AI-Powered Resume Analyzer" icon-name="standard:document">
+        <div class="slds-p-around_medium">
+            
+            <!-- Upload Section with Drag & Drop -->
+            <div class="upload-section slds-m-bottom_large">
+                <div class="slds-text-heading_small slds-m-bottom_small">
+                    <lightning-icon icon-name="utility:upload" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                    Upload Resume
+                </div>
+                
+                <div class="upload-drop-zone slds-box slds-p-around_medium">
+                    <div class="slds-text-align_center">
+                        <lightning-icon icon-name="utility:file" size="large" class="slds-m-bottom_small"></lightning-icon>
+                        
+                        <div class="slds-form-element">
+                            <input 
+                                type="file" 
+                                accept=".pdf,.doc,.docx"
+                                onchange={handleFileChange}
+                                disabled={isLoading}
+                                class="slds-file-selector__input slds-assistive-text"
+                                id="file-upload"
+                            />
+                            <label for="file-upload" class="custom-upload-btn slds-button slds-button_brand">
+                                <lightning-icon icon-name="utility:upload" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                Choose File or Drag & Drop
+                            </label>
+                        </div>
+                        
+                        <p class="slds-text-body_small slds-text-color_weak slds-m-top_small">
+                            Supported formats: PDF, DOC, DOCX (Max 10MB)
+                        </p>
+                        
+                        <template if:true={selectedFileName}>
+                            <div class="slds-m-top_small">
+                                <lightning-badge label={selectedFileName} icon-name="utility:file"></lightning-badge>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <template if:true={showProgressBar}>
+                    <div class="slds-m-top_medium">
+                        <div class="slds-progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={uploadProgress} role="progressbar">
+                            <span class="slds-progress-bar__value" style={progressBarStyle}>
+                                <span class="slds-assistive-text">{uploadProgress}% Complete</span>
+                            </span>
+                        </div>
+                        <div class="slds-text-align_center slds-m-top_x-small">
+                            <span class={statusClass}>{processingStatus}</span>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Processing Status -->
+                <template if:true={isLoading}>
+                    <div class="slds-m-top_medium slds-text-align_center">
+                        <lightning-spinner alternative-text="Processing" size="small" variant="brand"></lightning-spinner>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Resume Details Section -->
+            <template if:true={hasResumeDetails}>
+                <div class="resume-details-section slds-m-bottom_large">
+                    <div class="slds-page-header">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <lightning-icon icon-name="standard:contact" size="medium"></lightning-icon>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-page-header__title slds-truncate">{resumeDetails.Candidate_Name__c}</h2>
+                                        <p class="slds-text-body_small">{resumeDetails.Email__c}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-page-header__col-actions">
+                                <lightning-button-group>
+                                    <lightning-button 
+                                        label="Clear" 
+                                        icon-name="utility:clear"
+                                        onclick={handleClearView}
+                                    ></lightning-button>
+                                    <lightning-button 
+                                        variant="brand"
+                                        label="Upload Another" 
+                                        icon-name="utility:add"
+                                        onclick={handleUploadAnother}
+                                    ></lightning-button>
+                                </lightning-button-group>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information Card -->
+                    <lightning-card title="Contact Information" icon-name="utility:identity" class="slds-m-top_medium">
+                        <div class="slds-p-around_medium">
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">
+                                    <lightning-icon icon-name="utility:email" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                    Email
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">{resumeDetails.Email__c}</dd>
+                                
+                                <dt class="slds-dl_horizontal__label">
+                                    <lightning-icon icon-name="utility:phone_portrait" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                    Phone
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">{resumeDetails.Phone__c}</dd>
+                                
+                                <template if:true={resumeDetails.LinkedIn__c}>
+                                    <dt class="slds-dl_horizontal__label">
+                                        <lightning-icon icon-name="utility:link" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        LinkedIn
+                                    </dt>
+                                    <dd class="slds-dl_horizontal__detail">
+                                        <a href={resumeDetails.LinkedIn__c} target="_blank">{resumeDetails.LinkedIn__c}</a>
+                                    </dd>
+                                </template>
+                                
+                                <template if:true={resumeDetails.GitHub__c}>
+                                    <dt class="slds-dl_horizontal__label">
+                                        <lightning-icon icon-name="utility:socialshare" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        GitHub
+                                    </dt>
+                                    <dd class="slds-dl_horizontal__detail">
+                                        <a href={resumeDetails.GitHub__c} target="_blank">{resumeDetails.GitHub__c}</a>
+                                    </dd>
+                                </template>
+                                
+                                <template if:true={resumeDetails.Trailhead__c}>
+                                    <dt class="slds-dl_horizontal__label">
+                                        <lightning-icon icon-name="utility:trailhead" size="x-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        Trailhead
+                                    </dt>
+                                    <dd class="slds-dl_horizontal__detail">
+                                        <a href={resumeDetails.Trailhead__c} target="_blank">{resumeDetails.Trailhead__c}</a>
+                                    </dd>
+                                </template>
+                            </dl>
+                        </div>
+                    </lightning-card>
+
+                    <!-- Professional Summary -->
+                    <template if:true={resumeDetails.Professional_Summary__c}>
+                        <lightning-card title="Professional Summary" icon-name="utility:description" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <p class="formatted-text">{resumeDetails.Professional_Summary__c}</p>
+                            </div>
+                        </lightning-card>
+                    </template>
+
+                    <!-- Skills & Experience Overview -->
+                    <div class="slds-grid slds-wrap slds-gutters slds-m-top_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-card title="Skills" icon-name="utility:knowledge_base">
+                                <div class="slds-p-around_medium">
+                                    <p class="formatted-text skill-list">{resumeDetails.Skills__c}</p>
+                                </div>
+                            </lightning-card>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-card title="Experience" icon-name="utility:date_time">
+                                <div class="slds-p-around_medium">
+                                    <div class="slds-text-align_center">
+                                        <div class="experience-number">{resumeDetails.Total_Experience__c}</div>
+                                        <p class="slds-text-body_small">Years of Experience</p>
+                                    </div>
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <template if:true={resumeDetails.Work_Experience__c}>
+                        <lightning-card title="Work Experience" icon-name="utility:work_order_type" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <div class="formatted-text experience-section">{resumeDetails.Work_Experience__c}</div>
+                            </div>
+                        </lightning-card>
+                    </template>
+
+                    <!-- Education -->
+                    <template if:true={resumeDetails.Education__c}>
+                        <lightning-card title="Education" icon-name="utility:education" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <div class="formatted-text">{resumeDetails.Education__c}</div>
+                            </div>
+                        </lightning-card>
+                    </template>
+
+                    <!-- Projects -->
+                    <template if:true={resumeDetails.Projects__c}>
+                        <lightning-card title="Projects" icon-name="utility:record" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <div class="formatted-text">{resumeDetails.Projects__c}</div>
+                            </div>
+                        </lightning-card>
+                    </template>
+
+                    <!-- Certifications -->
+                    <template if:true={resumeDetails.Certifications__c}>
+                        <lightning-card title="Certifications" icon-name="utility:certificate" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <div class="formatted-text">{resumeDetails.Certifications__c}</div>
+                            </div>
+                        </lightning-card>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Resume List Section -->
+            <div class="resume-list-section">
+                <div class="slds-page-header">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <h3 class="slds-text-heading_small">
+                                <lightning-icon icon-name="utility:list" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                Recent Resumes ({filteredResumes.length})
+                            </h3>
+                        </div>
+                        <div class="slds-page-header__col-actions">
+                            <lightning-button 
+                                label={toggleButtonLabel}
+                                onclick={handleToggleResumeList}
+                            ></lightning-button>
+                        </div>
+                    </div>
+                </div>
+                
+                <template if:true={showResumeListView}>
+                    <div class="slds-m-top_medium">
+                        <!-- Search Bar -->
+                        <div class="slds-m-bottom_medium">
+                            <lightning-input 
+                                type="search" 
+                                label="Search Resumes" 
+                                placeholder="Search by name, email, or filename..."
+                                onchange={handleSearch}
+                                value={searchTerm}
+                            ></lightning-input>
+                        </div>
+
+                        <template if:true={hasResumes}>
+                            <div class="resume-table-container">
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_striped">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th scope="col" data-field="Candidate_Name__c" onclick={handleSort} class="sortable">
+                                                <div class="slds-truncate slds-th__action">
+                                                    Candidate Name
+                                                    <lightning-icon icon-name="utility:arrowdown" size="xx-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="Email__c" onclick={handleSort} class="sortable">
+                                                <div class="slds-truncate slds-th__action">Email</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate">Phone</div>
+                                            </th>
+                                            <th scope="col" data-field="Total_Experience__c" onclick={handleSort} class="sortable">
+                                                <div class="slds-truncate slds-th__action">Experience</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate">Status</div>
+                                            </th>
+                                            <th scope="col" data-field="CreatedDate" onclick={handleSort} class="sortable">
+                                                <div class="slds-truncate slds-th__action">Uploaded</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={filteredResumes} for:item="resume">
+                                            <tr key={resume.Id} class="slds-hint-parent">
+                                                <td>
+                                                    <div class="slds-truncate" title={resume.Candidate_Name__c}>
+                                                        <strong>{resume.Candidate_Name__c}</strong>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={resume.Email__c}>{resume.Email__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">{resume.Phone__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">{resume.Total_Experience__c} years</div>
+                                                </td>
+                                                <td>
+                                                    <lightning-badge 
+                                                        label={resume.Processing_Status__c}
+                                                    ></lightning-badge>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-date-time 
+                                                        value={resume.CreatedDate}
+                                                        year="numeric"
+                                                        month="short"
+                                                        day="2-digit"
+                                                    ></lightning-formatted-date-time>
+                                                </td>
+                                                <td>
+                                                    <lightning-button 
+                                                        label="View" 
+                                                        variant="brand-outline"
+                                                        data-id={resume.Id}
+                                                        onclick={handleViewResume}
+                                                    ></lightning-button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </template>
+                        
+                        <template if:false={hasResumes}>
+                            <div class="slds-illustration slds-illustration_small">
+                                <div class="slds-text-align_center slds-p-vertical_large">
+                                    <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                                    <h3 class="slds-text-heading_medium slds-m-top_small">No Resumes Found</h3>
+                                    <p class="slds-text-body_regular">
+                                        <template if:true={searchTerm}>Try adjusting your search criteria</template>
+                                        <template if:false={searchTerm}>Upload a resume to get started</template>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

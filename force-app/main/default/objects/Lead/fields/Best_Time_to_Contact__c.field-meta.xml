@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Best_Time_to_Contact__c</fullName>
+    <label>Best Time to Contact</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Morning (8 AM – 12 PM)</fullName>
+                <default>false</default>
+                <label>Morning (8 AM – 12 PM)</label>
+            </value>
+            <value>
+                <fullName>Afternoon (12 PM – 4 PM)</fullName>
+                <default>false</default>
+                <label>Afternoon (12 PM – 4 PM)</label>
+            </value>
+            <value>
+                <fullName>Evening (4 PM – 8 PM)</fullName>
+                <default>false</default>
+                <label>Evening (4 PM – 8 PM)</label>
+            </value>
+            <value>
+                <fullName>Anytime</fullName>
+                <default>false</default>
+                <label>Anytime</label>
+            </value>
+            <value>
+                <fullName>Weekends Only</fullName>
+                <default>false</default>
+                <label>Weekends Only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

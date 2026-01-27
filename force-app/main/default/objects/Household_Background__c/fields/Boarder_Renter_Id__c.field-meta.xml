@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Boarder_Renter_Id__c</fullName>
+    <displayFormat>BRID-{0000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Boarder/Renter Id</label>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

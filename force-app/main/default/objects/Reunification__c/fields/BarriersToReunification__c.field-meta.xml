@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BarriersToReunification__c</fullName>
+    <label>Barriers to Reunification</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Housing Instability</fullName>
+                <default>false</default>
+                <label>Housing Instability</label>
+            </value>
+            <value>
+                <fullName>Parental Substance Abuse</fullName>
+                <default>false</default>
+                <label>Parental Substance Abuse</label>
+            </value>
+            <value>
+                <fullName>Financial Instability</fullName>
+                <default>false</default>
+                <label>Financial Instability</label>
+            </value>
+            <value>
+                <fullName>Lack of Parental Engagement</fullName>
+                <default>false</default>
+                <label>Lack of Parental Engagement</label>
+            </value>
+            <value>
+                <fullName>Ongoing Legal Issues</fullName>
+                <default>false</default>
+                <label>Ongoing Legal Issues</label>
+            </value>
+            <value>
+                <fullName>Unmet Mental Health Needs</fullName>
+                <default>false</default>
+                <label>Unmet Mental Health Needs</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReasonForReunification__c</fullName>
+    <label>Reason for Reunification</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Improved Parental Situation</fullName>
+                <default>false</default>
+                <label>Improved Parental Situation</label>
+            </value>
+            <value>
+                <fullName>Court-Ordered</fullName>
+                <default>false</default>
+                <label>Court-Ordered</label>
+            </value>
+            <value>
+                <fullName>Family Counseling Completed</fullName>
+                <default>false</default>
+                <label>Family Counseling Completed</label>
+            </value>
+            <value>
+                <fullName>Parent Demonstrated Readiness</fullName>
+                <default>false</default>
+                <label>Parent Demonstrated Readiness</label>
+            </value>
+            <value>
+                <fullName>Placement Stability Concerns</fullName>
+                <default>false</default>
+                <label>Placement Stability Concerns</label>
+            </value>
+            <value>
+                <fullName>Child’s Best Interest</fullName>
+                <default>false</default>
+                <label>Child’s Best Interest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

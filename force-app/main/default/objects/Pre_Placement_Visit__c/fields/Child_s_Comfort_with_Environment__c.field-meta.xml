@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Child_s_Comfort_with_Environment__c</fullName>
+    <label>Child&apos;s Comfort with Environment</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Very Comfortable</fullName>
+                <default>false</default>
+                <label>Very Comfortable</label>
+            </value>
+            <value>
+                <fullName>Somewhat Comfortable</fullName>
+                <default>false</default>
+                <label>Somewhat Comfortable</label>
+            </value>
+            <value>
+                <fullName>Uncomfortable</fullName>
+                <default>false</default>
+                <label>Uncomfortable</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

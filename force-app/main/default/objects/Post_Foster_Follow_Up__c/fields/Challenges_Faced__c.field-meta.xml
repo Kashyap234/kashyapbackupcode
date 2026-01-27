@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Challenges_Faced__c</fullName>
+    <label>Challenges Faced</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Emotional Adjustments</fullName>
+                <default>false</default>
+                <label>Emotional Adjustments</label>
+            </value>
+            <value>
+                <fullName>Academic Performance</fullName>
+                <default>false</default>
+                <label>Academic Performance</label>
+            </value>
+            <value>
+                <fullName>Behavioural Issues</fullName>
+                <default>false</default>
+                <label>Behavioural Issues</label>
+            </value>
+            <value>
+                <fullName>Family Integration</fullName>
+                <default>false</default>
+                <label>Family Integration</label>
+            </value>
+            <value>
+                <fullName>Financial Stress</fullName>
+                <default>false</default>
+                <label>Financial Stress</label>
+            </value>
+            <value>
+                <fullName>Legal Paperwork</fullName>
+                <default>false</default>
+                <label>Legal Paperwork</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

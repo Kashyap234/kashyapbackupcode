@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medical_Needs_Willingness_If_any__c</fullName>
+    <label>Medical Needs Willingness(If any)</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Asthma</fullName>
+                <default>false</default>
+                <label>Asthma</label>
+            </value>
+            <value>
+                <fullName>Diabetes</fullName>
+                <default>false</default>
+                <label>Diabetes</label>
+            </value>
+            <value>
+                <fullName>ADHD</fullName>
+                <default>false</default>
+                <label>ADHD</label>
+            </value>
+            <value>
+                <fullName>Autism Spectrum</fullName>
+                <default>false</default>
+                <label>Autism Spectrum</label>
+            </value>
+            <value>
+                <fullName>Physical Disability</fullName>
+                <default>false</default>
+                <label>Physical Disability</label>
+            </value>
+            <value>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+                <label>No Preference</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

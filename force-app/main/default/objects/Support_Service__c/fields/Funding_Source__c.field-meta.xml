@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Funding_Source__c</fullName>
+    <label>Funding Source</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Government Grant</fullName>
+                <default>false</default>
+                <label>Government Grant</label>
+            </value>
+            <value>
+                <fullName>Non-Profit Organization</fullName>
+                <default>false</default>
+                <label>Non-Profit Organization</label>
+            </value>
+            <value>
+                <fullName>Private Donor</fullName>
+                <default>false</default>
+                <label>Private Donor</label>
+            </value>
+            <value>
+                <fullName>Self-Funded</fullName>
+                <default>false</default>
+                <label>Self-Funded</label>
+            </value>
+            <value>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+                <label>Insurance</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social_Adjustment__c</fullName>
+    <label>Social Adjustment</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Very Well</fullName>
+                <default>false</default>
+                <label>Very Well</label>
+            </value>
+            <value>
+                <fullName>Well</fullName>
+                <default>false</default>
+                <label>Well</label>
+            </value>
+            <value>
+                <fullName>Some Difficulty</fullName>
+                <default>false</default>
+                <label>Some Difficulty</label>
+            </value>
+            <value>
+                <fullName>Struggling</fullName>
+                <default>false</default>
+                <label>Struggling</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

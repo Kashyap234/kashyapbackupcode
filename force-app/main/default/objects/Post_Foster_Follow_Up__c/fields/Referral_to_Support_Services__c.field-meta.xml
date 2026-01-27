@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Referral_to_Support_Services__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>If the family is referred to Support Services</inlineHelpText>
+    <label>Referral to Support Services</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

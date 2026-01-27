@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>How_Did_You_Hear_About_Us__c</fullName>
+    <label>How Did You Hear About Us?</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Google/Search Engine</fullName>
+                <default>false</default>
+                <label>Google/Search Engine</label>
+            </value>
+            <value>
+                <fullName>Social Media (Facebook, Instagram, etc.)</fullName>
+                <default>false</default>
+                <label>Social Media (Facebook, Instagram, etc.)</label>
+            </value>
+            <value>
+                <fullName>State or County Website</fullName>
+                <default>false</default>
+                <label>State or County Website</label>
+            </value>
+            <value>
+                <fullName>Referral from Current Foster Parent</fullName>
+                <default>false</default>
+                <label>Referral from Current Foster Parent</label>
+            </value>
+            <value>
+                <fullName>Referral from Social Worker/Caseworker</fullName>
+                <default>false</default>
+                <label>Referral from Social Worker/Caseworker</label>
+            </value>
+            <value>
+                <fullName>Community Event or Info Session</fullName>
+                <default>false</default>
+                <label>Community Event or Info Session</label>
+            </value>
+            <value>
+                <fullName>Church or Faith-Based Organization</fullName>
+                <default>false</default>
+                <label>Church or Faith-Based Organization</label>
+            </value>
+            <value>
+                <fullName>Flyer or Poster (Library, Community Center, etc.)</fullName>
+                <default>false</default>
+                <label>Flyer or Poster (Library, Community Center, etc.)</label>
+            </value>
+            <value>
+                <fullName>Family or Friend</fullName>
+                <default>false</default>
+                <label>Family or Friend</label>
+            </value>
+            <value>
+                <fullName>Other (Please Specify)</fullName>
+                <default>false</default>
+                <label>Other (Please Specify)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

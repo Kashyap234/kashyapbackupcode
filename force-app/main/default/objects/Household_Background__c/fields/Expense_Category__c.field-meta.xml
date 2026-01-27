@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expense_Category__c</fullName>
+    <label>Expense Category</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Rent/mortgage</fullName>
+                <default>false</default>
+                <label>Rent/mortgage</label>
+            </value>
+            <value>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+                <label>Utilities</label>
+            </value>
+            <value>
+                <fullName>Car Payments</fullName>
+                <default>false</default>
+                <label>Car Payments</label>
+            </value>
+            <value>
+                <fullName>Car Insurance</fullName>
+                <default>false</default>
+                <label>Car Insurance</label>
+            </value>
+            <value>
+                <fullName>Other Insurance Loans/Debts</fullName>
+                <default>false</default>
+                <label>Other Insurance Loans/Debts</label>
+            </value>
+            <value>
+                <fullName>Food, Clothing, etc.</fullName>
+                <default>false</default>
+                <label>Food, Clothing, etc.</label>
+            </value>
+            <value>
+                <fullName>Other Expense</fullName>
+                <default>false</default>
+                <label>Other Expense</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

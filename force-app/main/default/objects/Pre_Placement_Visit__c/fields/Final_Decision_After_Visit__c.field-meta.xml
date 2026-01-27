@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final_Decision_After_Visit__c</fullName>
+    <label>Final Decision After Visit</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Proceed with Placement</fullName>
+                <default>false</default>
+                <label>Proceed with Placement</label>
+            </value>
+            <value>
+                <fullName>Require Further Visits</fullName>
+                <default>false</default>
+                <label>Require Further Visits</label>
+            </value>
+            <value>
+                <fullName>Not a Suitable Match</fullName>
+                <default>false</default>
+                <label>Not a Suitable Match</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

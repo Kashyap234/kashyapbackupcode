@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EducationalLevel__c</fullName>
+    <label>Educational Level</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pre-K</fullName>
+                <default>false</default>
+                <label>Pre-K</label>
+            </value>
+            <value>
+                <fullName>Elementary</fullName>
+                <default>false</default>
+                <label>Elementary</label>
+            </value>
+            <value>
+                <fullName>Middle School</fullName>
+                <default>false</default>
+                <label>Middle School</label>
+            </value>
+            <value>
+                <fullName>High School</fullName>
+                <default>false</default>
+                <label>High School</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

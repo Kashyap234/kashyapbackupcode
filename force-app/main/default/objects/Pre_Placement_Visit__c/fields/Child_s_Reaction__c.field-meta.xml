@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Child_s_Reaction__c</fullName>
+    <label>Child&apos;s Reaction</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comfortable</fullName>
+                <default>false</default>
+                <label>Comfortable</label>
+            </value>
+            <value>
+                <fullName>Hesitant</fullName>
+                <default>false</default>
+                <label>Hesitant</label>
+            </value>
+            <value>
+                <fullName>Anxious</fullName>
+                <default>false</default>
+                <label>Anxious</label>
+            </value>
+            <value>
+                <fullName>Excited</fullName>
+                <default>false</default>
+                <label>Excited</label>
+            </value>
+            <value>
+                <fullName>Neutral</fullName>
+                <default>false</default>
+                <label>Neutral</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

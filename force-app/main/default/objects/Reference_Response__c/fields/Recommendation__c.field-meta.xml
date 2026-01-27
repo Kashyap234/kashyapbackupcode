@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recommendation__c</fullName>
+    <label>Would You Recommend the Applicant?</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Strongly recommend</fullName>
+                <default>false</default>
+                <label>Strongly recommend</label>
+            </value>
+            <value>
+                <fullName>Recommend</fullName>
+                <default>false</default>
+                <label>Recommend</label>
+            </value>
+            <value>
+                <fullName>With some reservations</fullName>
+                <default>false</default>
+                <label>With some reservations</label>
+            </value>
+            <value>
+                <fullName>Do not recommend</fullName>
+                <default>false</default>
+                <label>Do not recommend</label>
+            </value>
+            <value>
+                <fullName>Uncertain</fullName>
+                <default>false</default>
+                <label>Uncertain</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

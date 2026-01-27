@@ -1,0 +1,157 @@
+<!-- resumeViewer.html -->
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium">
+            <!-- Status Banner -->
+            <template if:true={resume}>
+                <div class="slds-m-bottom_medium">
+                    <lightning-badge 
+                        label={resume.Processing_Status__c} 
+                        icon-name={statusIcon}>
+                    </lightning-badge>
+                    
+                    <template if:true={isProcessing}>
+                        <lightning-button 
+                            variant="base" 
+                            icon-name="utility:refresh" 
+                            onclick={handleRefresh}
+                            class="slds-m-left_small">
+                        </lightning-button>
+                        <p class="slds-m-top_small slds-text-color_weak">
+                            Document AI is analyzing the resume...
+                        </p>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Candidate Summary -->
+            <template if:true={isCompleted}>
+                <div class="candidate-header slds-box slds-theme_shade slds-m-bottom_medium">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12">
+                            <h1 class="slds-text-heading_large">
+                                {resume.Candidate_Name__c}
+                            </h1>
+                            <div class="slds-m-top_small">
+                                <lightning-icon 
+                                    icon-name="utility:email" 
+                                    size="x-small" 
+                                    class="slds-m-right_x-small">
+                                </lightning-icon>
+                                <span>{resume.Email__c}</span>
+                            </div>
+                            <div class="slds-m-top_x-small">
+                                <lightning-icon 
+                                    icon-name="utility:phone_portrait" 
+                                    size="x-small" 
+                                    class="slds-m-right_x-small">
+                                </lightning-icon>
+                                <span>{resume.Phone__c}</span>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+                            <div class="stat-box slds-text-align_center">
+                                <div class="stat-value">{resume.Total_Experience__c}</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <template if:true={hasSkills}>
+                    <div class="section-container slds-m-bottom_medium">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                            <lightning-icon 
+                                icon-name="standard:skill_entity" 
+                                size="small" 
+                                class="slds-m-right_x-small">
+                            </lightning-icon>
+                            Skills
+                        </h2>
+                        <div class="skills-container">
+                            <template for:each={skillsList} for:item="skill">
+                                <lightning-badge 
+                                    key={skill} 
+                                    label={skill} 
+                                    class="slds-m-right_x-small slds-m-bottom_x-small">
+                                </lightning-badge>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Work Experience Section -->
+                <template if:true={hasExperience}>
+                    <div class="section-container slds-m-bottom_medium">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                            <lightning-icon 
+                                icon-name="standard:work_capacity_usage" 
+                                size="small" 
+                                class="slds-m-right_x-small">
+                            </lightning-icon>
+                            Work Experience
+                        </h2>
+                        <div class="content-box">
+                            <lightning-formatted-text value={resume.Work_Experience__c}>
+                            </lightning-formatted-text>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Education Section -->
+                <template if:true={hasEducation}>
+                    <div class="section-container slds-m-bottom_medium">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                            <lightning-icon 
+                                icon-name="standard:education" 
+                                size="small" 
+                                class="slds-m-right_x-small">
+                            </lightning-icon>
+                            Education
+                        </h2>
+                        <div class="content-box">
+                            <lightning-formatted-text value={resume.Education__c}>
+                            </lightning-formatted-text>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Certifications Section -->
+                <template if:true={hasCertifications}>
+                    <div class="section-container slds-m-bottom_medium">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                            <lightning-icon 
+                                icon-name="standard:reward" 
+                                size="small" 
+                                class="slds-m-right_x-small">
+                            </lightning-icon>
+                            Certifications
+                        </h2>
+                        <div class="content-box">
+                            <lightning-formatted-text value={resume.Certifications__c}>
+                            </lightning-formatted-text>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Error State -->
+            <template if:true={isFailed}>
+                <div class="slds-text-color_error">
+                    <p>Failed to process resume. Please try uploading again.</p>
+                </div>
+            </template>
+
+            <!-- Loading State -->
+            <template if:true={isProcessing}>
+                <div class="slds-text-align_center slds-p-around_large">
+                    <lightning-spinner 
+                        alternative-text="Processing" 
+                        size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

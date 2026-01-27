@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pet_Id__c</fullName>
+    <displayFormat>PID-{00000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Pet Id</label>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

@@ -359,10 +359,6 @@
     <picklistValues>
         <picklist>LeadSource</picklist>
         <values>
-            <fullName>Employee Referral</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>External Referral</fullName>
             <default>false</default>
         </values>

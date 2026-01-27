@@ -11,8 +11,4 @@
         <fullName>Decision Pending</fullName>
         <default>true</default>
     </values>
-    <values>
-        <fullName>Denied</fullName>
-        <default>false</default>
-    </values>
 </BusinessProcess>

@@ -39,10 +39,6 @@
     <picklistValues>
         <picklist>BuyerAttributes</picklist>
         <values>
-            <fullName>Buyer</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Champion</fullName>
             <default>false</default>
         </values>

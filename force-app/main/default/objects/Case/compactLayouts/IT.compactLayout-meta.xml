@@ -3,7 +3,6 @@
     <fullName>IT</fullName>
     <fields>Subject</fields>
     <fields>CaseNumber</fields>
-    <fields>RecordTypeId</fields>
     <fields>Priority</fields>
     <fields>AccountId</fields>
     <fields>OwnerId</fields>

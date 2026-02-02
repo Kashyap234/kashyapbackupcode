@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>This intelligent agent assists users with questions about North Carolina ABC (Alcoholic Beverage Control) stores, permits, regulations, and services. It provides accurate information on store locations, operating hours, permit applications, renewal processes, special orders, age requirements, and compliance regulations. The agent searches through official NCABC documentation and provides helpful answers with relevant website links for additional details. If information is unavailable, it guides users to appropriate NCABC contact channels.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jgL000000ldFd</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>NCABC_Information_Query_Handler_16jgL000000ldFd</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>NCABC_Information_Query_Handler_16jgL000000ldFd</fullName>
+        <canEscalate>true</canEscalate>
+        <description>This topic handles all user inquiries related to North Carolina ABC stores, permits, regulations, operating hours, special orders, and compliance requirements. It responds to questions about store locations, permit applications, renewals, age requirements, holiday closures, and general ABC policies. Activates when users ask about ABC stores, alcohol permits, spirituous liquor sales, or any NCABC-related information.</description>
+        <developerName>NCABC_Information_Query_Handler_16jgL000000ldFd</developerName>
+        <genAiPluginInstructions>
+            <description>First, search the Prompt Template Retriever to find if there&apos;s a pre-configured answer for common questions. If a relevant answer is found with confidence score above 80%, provide that response immediately and end the topic. If no confident match is found, proceed to instruction 2.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Second, search the Data Library (NCABC PDF knowledge base) using the Einstein Search Retriever to find detailed information. Analyze the retrieved content and if relevant information is found that answers the user&apos;s question, formulate a clear response including any URLs mentioned in the source material, then end the topic. If no relevant information is found, proceed to instruction 3.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Third, if neither the Prompt Template Retriever nor the Data Library contains the answer, provide the fallback message: &quot;I apologize, but I don&apos;t have specific information about your question in my current knowledge base. For immediate assistance, please visit the official NCABC website at https://www.abc.nc.gov or contact the ABC Commission directly. Is there anything else about ABC stores, permits, or regulations I can help you with?&quot; This ensures the user receives guidance even when information is unavailable.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Include a rule to cross-reference general operating hour restrictions (e.g., &quot;No ABC store shall be open between 9:00 p.m. and 9:00 a.m. or on Sundays&quot;) when specific store hours are not retrievable. This ensures the agent provides at least a baseline response based on state-wide regulations.</description>
+            <developerName>instructions_0_1760440353390</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1760440353390</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179gL000000STYX</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179gL000000STYX</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179gL000000STYX</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localDeveloperName>NCABC_Information_Query_Handler</localDeveloperName>
+        <masterLabel>NCABC Information Query Handler</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Responds to questions about:
+- ABC store locations, hours, and operations
+- Permit applications, renewals, and requirements
+- Alcohol regulations and compliance in North Carolina
+- Special orders and product availability
+- Age requirements for employees and customers
+- Holiday closures and business hours
+- Commercial and one-time event permits
+- Background checks and fingerprinting requirements
+- Ownership changes and business relocations
+- General NCABC policies and procedures</scope>
+    </localTopics>
+    <masterLabel>NCABC Information Assistant</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jgL000000ldFd</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jgL000000ldFd</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__Messaging</surface>
+        <surfaceType>Messaging</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+    <ruleExpressions>
+        <conditions>
+            <leftOperand>isVerified</leftOperand>
+            <leftOperandType>Variable</leftOperandType>
+            <operator>equal</operator>
+            <rightOperandValue>true</rightOperandValue>
+        </conditions>
+        <expression>Verified_User</expression>
+        <expressionLabel>Verified User</expressionLabel>
+        <expressionName>Verified_User</expressionName>
+        <expressionType>sel</expressionType>
+    </ruleExpressions>
+</GenAiPlannerBundle>

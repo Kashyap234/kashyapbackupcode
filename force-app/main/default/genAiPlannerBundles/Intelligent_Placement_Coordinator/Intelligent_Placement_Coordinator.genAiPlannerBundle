@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>Assists caseworkers in finding optimal foster care placements. This agent runs advanced matching algorithms to evaluate compatibility between children and families based on criteria like age, medical needs, and location. It strictly validates hard constraints (such as license status and capacity), summarizes top match scores, and highlights potential risks or &quot;flags&quot; to ensure safe, informed decision-making.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jgK0000016YjB</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>Placement_Matching_16jgK0000016YjB</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>Placement_Matching_16jgK0000016YjB</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Handles requests related to finding foster care placements. This includes searching for suitable families for a specific child, finding children that match a family&apos;s preferences, and checking compatibility scores between records.</description>
+        <developerName>Placement_Matching_16jgK0000016YjB</developerName>
+        <genAiPluginInstructions>
+            <description>1. **Extract the Identifier:**
+   - Listen for a Child Name (e.g., &quot;C-0480&quot;) or a Preference ID (e.g., &quot;PID-005&quot;).
+   - Extract this value into the `Record Identifier` field.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>2. **Execute:**
+   - Call the `Run Placement Matching` action. You do not need to specify a search type; the tool handles this automatically.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>3. **Safety First:**
+   - You must strictly communicate any **Flags** returned by the tool (e.g., &quot;Distance &gt; 50 miles&quot; or &quot;Sibling Group&quot;). Do not hide these warnings.
+   - If the tool returns &quot;No matches found,&quot; inform the user that hard constraints (like Capacity or License Status) likely prevented a match.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>4. **Next Steps:**
+   - After presenting a strong match (Score &gt; 80%), ask the caseworker if they would like to mark it as &quot;Recommended&quot;.</description>
+            <developerName>instruction_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 4</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>5. **Report Results:**
+   - Summarize the top match provided by the tool, including the Score and Reasons.
+   - Always warn the user if &quot;Flags&quot; are present in the results.</description>
+            <developerName>instructions_0_1770061019809</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1770061019809</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Run_Placement_Matching_179gK000000yAKf</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Run_Placement_Matching_179gK000000yAKf</fullName>
+            <description>Auto-detects if the input is a Child or Preference and finds matches.</description>
+            <developerName>Run_Placement_Matching_179gK000000yAKf</developerName>
+            <invocationTarget>AgentMatchingService</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Run_Placement_Matching</localDeveloperName>
+            <masterLabel>Run Placement Matching</masterLabel>
+            <progressIndicatorMessage>i am fetching your data</progressIndicatorMessage>
+            <source>Run_Placement_Matching</source>
+        </localActions>
+        <localDeveloperName>Placement_Matching</localDeveloperName>
+        <masterLabel>Placement Matching</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>User wants to find a match, evaluating compatibility, or inquire about placement feasibility for a Child or Family record.</scope>
+    </localTopics>
+    <masterLabel>Intelligent Placement Coordinator</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jgK0000016YjB</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jgK0000016YjB</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__Messaging</surface>
+        <surfaceType>Messaging</surfaceType>
+    </plannerSurfaces>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__CustomerWebClient</surface>
+        <surfaceType>CustomerWebClient</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+    <ruleExpressions>
+        <conditions>
+            <leftOperand>isVerified</leftOperand>
+            <leftOperandType>Variable</leftOperandType>
+            <operator>equal</operator>
+            <rightOperandValue>true</rightOperandValue>
+        </conditions>
+        <expression>Verified_User</expression>
+        <expressionLabel>Verified User</expressionLabel>
+        <expressionName>Verified_User</expressionName>
+        <expressionType>sel</expressionType>
+    </ruleExpressions>
+</GenAiPlannerBundle>

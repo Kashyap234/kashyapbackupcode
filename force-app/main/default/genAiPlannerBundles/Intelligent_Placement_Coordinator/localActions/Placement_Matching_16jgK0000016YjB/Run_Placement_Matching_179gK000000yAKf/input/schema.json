@@ -1,0 +1,14 @@
+{
+  "required" : [ "recordIdentifier" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordIdentifier" : {
+      "title" : "Record Identifier",
+      "description" : "The Name (e.g., C-001, PID-005) or ID of the record.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

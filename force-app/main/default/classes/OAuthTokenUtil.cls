@@ -1,10 +1,10 @@
 public class OAuthTokenUtil {
     public static String getAccessToken() {
         // Replace with your actual values or retrieve from Named Credential/Custom Setting
-        String clientId = 'Replace with your actual values or retrieve from Named Credential/Custom Setting';
-        String clientSecret = 'Replace with your actual values or retrieve from Named Credential/Custom Setting';
+        String clientId = 'clientid';
+        String clientSecret = 'clientsecret';
         String username = 'username';
-        String password = 'userrpassword+securitytoken';
+        String password = 'password+securitytoken';
 
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://login.salesforce.com/services/oauth2/token');

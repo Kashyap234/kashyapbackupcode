@@ -25,6 +25,11 @@
                 <default>false</default>
                 <label>Fostered</label>
             </value>
+            <value>
+                <fullName>Needs Placement</fullName>
+                <default>false</default>
+                <label>Needs Placement</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

@@ -11,9 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>American Indian or Alaska Native</fullName>
+                <fullName>No Preference</fullName>
                 <default>false</default>
-                <label>American Indian or Alaska Native</label>
+                <label>No Preference</label>
+            </value>
+            <value>
+                <fullName>African American / Black</fullName>
+                <default>false</default>
+                <label>African American / Black</label>
+            </value>
+            <value>
+                <fullName>Hispanic / Latino</fullName>
+                <default>false</default>
+                <label>Hispanic / Latino</label>
+            </value>
+            <value>
+                <fullName>White / Caucasian</fullName>
+                <default>false</default>
+                <label>White / Caucasian</label>
             </value>
             <value>
                 <fullName>Asian</fullName>
@@ -21,24 +36,9 @@
                 <label>Asian</label>
             </value>
             <value>
-                <fullName>Black or African American</fullName>
+                <fullName>Other (please specify)</fullName>
                 <default>false</default>
-                <label>Black or African American</label>
-            </value>
-            <value>
-                <fullName>Native Hawaiian or Other Pacific Islander</fullName>
-                <default>false</default>
-                <label>Native Hawaiian or Other Pacific Islander</label>
-            </value>
-            <value>
-                <fullName>White</fullName>
-                <default>false</default>
-                <label>White</label>
-            </value>
-            <value>
-                <fullName>Prefer Not to Answer</fullName>
-                <default>false</default>
-                <label>Prefer Not to Answer</label>
+                <label>Other (please specify)</label>
             </value>
         </valueSetDefinition>
     </valueSet>

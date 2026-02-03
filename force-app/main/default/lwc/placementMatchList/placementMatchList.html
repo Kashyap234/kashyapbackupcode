@@ -1,0 +1,44 @@
+<template>
+    <lightning-card icon-name="standard:coaching" class="slds-var-p-around_small">
+        <h2 slot="title">Top Placement Matches</h2>
+        
+        <div class="slds-feed">
+            <ul class="slds-feed__list">
+                <template for:each={matches} for:item="match">
+                    <li key={match.recordId} class="slds-feed__item slds-card slds-var-m-bottom_small slds-var-p-around_small">
+                        <article class="slds-post">
+                            <header class="slds-post__header slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                        <p>
+                                            <a href="javascript:void(0);" onclick={handleNavigate} data-record-id={match.recordId} class="slds-text-heading_small">
+                                                {match.title}
+                                            </a>
+                                        </p>
+                                        <lightning-badge label={match.scoreLabel} class={match.badgeClass}></lightning-badge>
+                                    </div>
+                                    <p class="slds-text-body_small slds-text-color_weak">{match.subtitle}</p>
+                                </div>
+                            </header>
+                            <div class="slds-post__content slds-text-longform slds-var-m-top_small">
+                                <p><strong>Why:</strong> {match.details}</p>
+                            </div>
+                            <footer class="slds-post__footer slds-var-m-top_small">
+                                <lightning-button 
+                                    label="View Record" 
+                                    variant="neutral" 
+                                    onclick={handleNavigate} 
+                                    data-record-id={match.recordId}
+                                    class="slds-size_full">
+                                </lightning-button>
+                            </footer>
+                        </article>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>

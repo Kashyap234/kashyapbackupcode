@@ -1,0 +1,5 @@
+{
+  "title": "Placement Results",
+  "description": "Custom UI for Placement Matches",
+  "lightning:type": "@apexClassType/c__PlacementResults"
+}

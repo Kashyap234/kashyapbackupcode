@@ -1,10 +1,19 @@
 {
   "unevaluatedProperties" : false,
   "properties" : {
-    "results" : {
-      "title" : "Placement Results",
-      "description" : "Return the result to the user",
-      "lightning:type" : "@apexClassType/c__PlacementResults",
+    "matchSummary" : {
+      "title" : "Match Summary",
+      "description" : "Natural language summary of results",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "topMatchId" : {
+      "title" : "Top Match ID",
+      "description" : "retrieved id",
+      "lightning:type" : "lightning__richTextType",
       "lightning:isPII" : false,
       "copilotAction:isDisplayable" : true,
       "copilotAction:isUsedByPlanner" : true,

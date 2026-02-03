@@ -4,7 +4,7 @@
   "properties" : {
     "recordIdentifier" : {
       "title" : "Record Identifier",
-      "description" : "Identify the Record",
+      "description" : "The Name (e.g., C-001, PID-005) or ID of the record.",
       "lightning:type" : "lightning__textType",
       "lightning:isPII" : false,
       "copilotAction:isUserInput" : true

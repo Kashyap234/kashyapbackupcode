@@ -4,7 +4,7 @@
     "results" : {
       "title" : "Placement Results",
       "description" : "display the fetched result.",
-      "lightning:type" : "@apexClassType/c__PlacementResults",
+      "lightning:type" : "c__placementResults",
       "lightning:isPII" : false,
       "copilotAction:isDisplayable" : true,
       "copilotAction:isUsedByPlanner" : true,

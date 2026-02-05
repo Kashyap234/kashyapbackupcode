@@ -1,0 +1,280 @@
+<template>
+    <lightning-card title="Top Family Matches (Matrix-Based)" icon-name="custom:custom63">
+        <!-- Header Actions -->
+        <div slot="actions">
+            <lightning-button-group>
+                <lightning-button
+                    label="Refresh"
+                    variant="neutral"
+                    onclick={handleRefresh}
+                    disabled={isRefreshing}
+                    icon-name="utility:refresh"
+                ></lightning-button>
+                <lightning-button
+                    label="Recalculate"
+                    variant="brand"
+                    onclick={handleTriggerRecalculation}
+                    disabled={isRefreshing}
+                    icon-name="utility:sync"
+                ></lightning-button>
+                <lightning-button
+                    label={viewModeLabel}
+                    icon-name={viewModeIcon}
+                    onclick={toggleViewMode}
+                    disabled={isRefreshing}
+                ></lightning-button>
+            </lightning-button-group>
+        </div>
+        
+        <!-- Batch Status Banner -->
+        <template if:true={isBatchRunning}>
+            <div class="slds-m-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+                    <span class="slds-assistive-text">info</span>
+                    <lightning-icon icon-name="utility:sync" size="x-small" variant="warning"></lightning-icon>
+                    <h2>
+                        <lightning-formatted-text value={batchStatusMessage}></lightning-formatted-text>
+                    </h2>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Last Update Info -->
+        <template if:false={isBatchRunning}>
+            <template if:true={batchStatusMessage}>
+                <div class="slds-m-horizontal_medium slds-m-top_small">
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        <lightning-icon icon-name="utility:info" size="xx-small"></lightning-icon>
+                        {batchStatusMessage}
+                    </p>
+                </div>
+            </template>
+        </template>
+        
+        <!-- Loading Spinner -->
+        <template if:true={isRefreshing}>
+            <div class="slds-m-around_medium">
+                <lightning-spinner
+                    alternative-text="Loading matches..."
+                    size="medium"
+                ></lightning-spinner>
+            </div>
+        </template>
+        
+        <!-- Results Section -->
+        <template if:true={hasResults}>
+            <div class="slds-m-around_medium">
+                
+                <!-- Summary Stats -->
+                <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-box slds-text-align_center">
+                            <div class="slds-text-heading_large slds-text-color_success">{totalMatches}</div>
+                            <div class="slds-text-body_small">Total Matches</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-box slds-text-align_center">
+                            <div class="slds-text-heading_large slds-text-color_brand">{topScore}</div>
+                            <div class="slds-text-body_small">Best Score</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-box slds-text-align_center">
+                            <div class="slds-text-heading_large">{avgDistance}</div>
+                            <div class="slds-text-body_small">Avg Distance (mi)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table View -->
+                <template if:true={isTableView}>
+                    <lightning-datatable
+                        key-field="matrixId"
+                        data={matchResults}
+                        columns={columns}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column
+                    ></lightning-datatable>
+                </template>
+                
+                <!-- Detailed Card View -->
+                <template if:true={isDetailedView}>
+                    <template for:each={matchResults} for:item="match">
+                        <article key={match.matrixId} class="slds-card slds-m-bottom_medium">
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__figure">
+                                        <div class={match.rankBadgeClass}>
+                                            <span class="rank-number">{match.matchRank}</span>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            <a onclick={handleViewFamily} data-id={match.familyId} class="slds-card__header-link">
+                                                <span class="slds-text-heading_small">{match.familyName}</span>
+                                            </a>
+                                        </h2>
+                                        <div class="slds-text-body_small slds-text-color_weak">
+                                            {match.familyLocation} • Capacity: {match.familyCapacity} • {match.distanceMiles} miles away
+                                        </div>
+                                        <template if:true={match.isTopMatch}>
+                                            <div class="slds-m-top_xx-small">
+                                                <lightning-badge label="Top Match" class="slds-theme_success"></lightning-badge>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </header>
+                                <div class="slds-no-flex">
+                                    <div class="score-badge">
+                                        <div class={match.scoreClass} style="font-size: 28px; font-weight: bold; line-height: 1;">{match.scoreDisplay}</div>
+                                        <div class="score-label">Match Score</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-card__body slds-card__body_inner">
+                                <!-- Overall Score Progress Bar -->
+                                <div class="slds-m-bottom_medium">
+                                    <div class="slds-text-heading_small slds-m-bottom_x-small">
+                                        {match.matchRankLabel}
+                                    </div>
+                                    <lightning-progress-bar 
+                                        value={match.overallScore} 
+                                        variant={match.progressVariant}
+                                        size="large"
+                                    ></lightning-progress-bar>
+                                </div>
+                                
+                                <!-- Score Breakdown -->
+                                <lightning-tabset variant="scoped">
+                                    <lightning-tab label="Score Breakdown" icon-name="utility:chart">
+                                        <div class="slds-p-around_small">
+                                            <div class="score-breakdown-grid">
+                                                <!-- High Priority -->
+                                                <div class="score-breakdown-item">
+                                                    <div class="slds-text-heading_small">
+                                                        <lightning-icon icon-name="utility:priority" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                                        High Priority
+                                                    </div>
+                                                    <div class="score-breakdown-value">{match.highPriorityScore}%</div>
+                                                    <lightning-progress-bar 
+                                                        value={match.highPriorityScore} 
+                                                        variant={match.progressVariant}
+                                                    ></lightning-progress-bar>
+                                                </div>
+                                                
+                                                <!-- Medium Priority -->
+                                                <div class="score-breakdown-item">
+                                                    <div class="slds-text-heading_small">
+                                                        <lightning-icon icon-name="utility:record" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                                        Medium Priority
+                                                    </div>
+                                                    <div class="score-breakdown-value">{match.mediumPriorityScore}%</div>
+                                                    <lightning-progress-bar 
+                                                        value={match.mediumPriorityScore} 
+                                                        variant="base"
+                                                    ></lightning-progress-bar>
+                                                </div>
+                                                
+                                                <!-- Low Priority -->
+                                                <div class="score-breakdown-item">
+                                                    <div class="slds-text-heading_small">
+                                                        <lightning-icon icon-name="utility:pin" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                                        Low Priority
+                                                    </div>
+                                                    <div class="score-breakdown-value">{match.lowPriorityScore}%</div>
+                                                    <lightning-progress-bar 
+                                                        value={match.lowPriorityScore} 
+                                                        variant="base"
+                                                    ></lightning-progress-bar>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Calculation Formula -->
+                                            <div class="slds-m-top_medium slds-p-around_small" style="background-color: #f3f3f3; border-radius: 4px;">
+                                                <div class="slds-text-heading_small slds-m-bottom_x-small">Score Calculation</div>
+                                                <div class="slds-text-body_small">
+                                                    Final Score = (High × 60%) + (Medium × 30%) + (Low × 10%) + Distance Bonus
+                                                </div>
+                                                <div class="slds-text-body_small slds-m-top_x-small">
+                                                    Distance Adjustment: {match.distanceAdjustment}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-tab>
+                                    
+                                    <lightning-tab label="Family Details" icon-name="utility:groups">
+                                        <div class="slds-p-around_small">
+                                            <dl class="slds-dl_horizontal">
+                                                <dt class="slds-dl_horizontal__label">Family Name:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.familyName}</dd>
+                                                
+                                                <dt class="slds-dl_horizontal__label">Location:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.familyLocation}</dd>
+                                                
+                                                <dt class="slds-dl_horizontal__label">Available Capacity:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.familyCapacity}</dd>
+                                                
+                                                <dt class="slds-dl_horizontal__label">License Status:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.licenseStatus}</dd>
+                                                
+                                                <dt class="slds-dl_horizontal__label">Distance:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.distanceMiles} miles</dd>
+                                                
+                                                <dt class="slds-dl_horizontal__label">Calculated:</dt>
+                                                <dd class="slds-dl_horizontal__detail">{match.calculatedDateFormatted}</dd>
+                                            </dl>
+                                        </div>
+                                    </lightning-tab>
+                                </lightning-tabset>
+                            </div>
+                            
+                            <footer class="slds-card__footer">
+                                <div class="slds-grid slds-grid_align-spread">
+                                    <div class="slds-col">
+                                        <lightning-button
+                                            label="View Preference"
+                                            icon-name="utility:preview"
+                                            onclick={handleViewPreference}
+                                            data-id={match.preferenceId}
+                                        ></lightning-button>
+                                    </div>
+                                    <div class="slds-col slds-no-flex">
+                                        <lightning-button
+                                            label="View Family Record"
+                                            variant="brand"
+                                            icon-name="utility:new_window"
+                                            onclick={handleViewFamily}
+                                            data-id={match.familyId}
+                                        ></lightning-button>
+                                    </div>
+                                </div>
+                            </footer>
+                        </article>
+                    </template>
+                </template>
+            </div>
+        </template>
+        
+        <!-- No Results Message -->
+        <template if:false={hasResults}>
+            <template if:false={isRefreshing}>
+                <div class="slds-m-around_medium slds-text-align_center">
+                    <div class="slds-illustration slds-illustration_small">
+                        <img src="/img/chatter/OpenRoad.svg" class="slds-illustration__svg" alt="No matches" />
+                        <div class="slds-text-longform">
+                            <h3 class="slds-text-heading_medium">No Matches Available</h3>
+                            <p class="slds-text-body_regular">
+                                The matching calculation batch may not have run yet, or no suitable families were found.
+                            </p>
+                            <p class="slds-text-body_regular slds-m-top_small">
+                                Click "Recalculate" to trigger the matching process.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

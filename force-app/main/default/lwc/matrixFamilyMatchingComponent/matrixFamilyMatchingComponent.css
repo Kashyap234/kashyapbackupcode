@@ -1,0 +1,163 @@
+/* Rank Badge Styling */
+.rank-badge-gold,
+.rank-badge-silver,
+.rank-badge-bronze,
+.rank-badge-default {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.rank-badge-gold {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    border: 3px solid #daa520;
+}
+
+.rank-badge-silver {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+    border: 3px solid #a8a8a8;
+}
+
+.rank-badge-bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #d4a574 100%);
+    border: 3px solid #a0522d;
+}
+
+.rank-badge-default {
+    background: linear-gradient(135deg, #5a5a5a 0%, #7a7a7a 100%);
+    border: 3px solid #3a3a3a;
+}
+
+.rank-number {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Score Badge Styling */
+.score-badge {
+    text-align: center;
+    padding: 8px;
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    min-width: 80px;
+}
+
+.score-label {
+    font-size: 11px;
+    color: #706e6b;
+    margin-top: 4px;
+}
+
+/* Score Breakdown Grid */
+.score-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.score-breakdown-item {
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    border: 1px solid #dddbda;
+}
+
+.score-breakdown-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0070d2;
+    margin: 8px 0;
+}
+
+/* Summary Stats Boxes */
+.slds-box {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 16px;
+}
+
+/* Card Styling */
+.slds-card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.slds-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Progress Bar Customization */
+lightning-progress-bar {
+    margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .score-breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .slds-grid.slds-gutters {
+        flex-direction: column;
+    }
+    
+    .slds-col {
+        width: 100% !important;
+        margin-bottom: 8px;
+    }
+    
+    .rank-badge-gold,
+    .rank-badge-silver,
+    .rank-badge-bronze,
+    .rank-badge-default {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .rank-number {
+        font-size: 18px;
+    }
+}
+
+/* Alert Styling */
+.slds-notify_alert {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Definition List Improvements */
+.slds-dl_horizontal dt {
+    font-weight: 600;
+    color: #3e3e3c;
+}
+
+.slds-dl_horizontal dd {
+    margin-bottom: 8px;
+}
+
+/* Icon Alignment */
+lightning-icon {
+    vertical-align: middle;
+}
+
+/* Tab Content */
+lightning-tab {
+    padding: 0 !important;
+}
+
+/* Card Footer */
+.slds-card__footer {
+    padding: 12px 16px;
+    background-color: #fafaf9;
+    border-top: 1px solid #dddbda;
+}

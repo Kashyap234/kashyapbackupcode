@@ -21,9 +21,5 @@
     <members>*</members>
     <name>CustomMetadata</name>     
 </types>
-<types>
-    <members>*</members>
-    <name>GenAiPlannerBundle</name>     
-</types>
     <version>65.0</version>
 </Package>

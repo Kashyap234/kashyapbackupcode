@@ -25,5 +25,9 @@
     <members>*</members>
     <name>GenAiPlannerBundle</name>     
 </types>
+<types>
+    <members>*</members>    
+    <name>FlexiPage</name>
+</types>
     <version>65.0</version>
 </Package>
